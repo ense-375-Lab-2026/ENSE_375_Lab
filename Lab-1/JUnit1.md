@@ -71,10 +71,10 @@ Make sure you have the following installed:
 ---
 
 ## Calculator Assignment example.
-The first lab assignment you have is to make sure that you can click the link on URCourses and access the Calculator Example through our GitHub classroom.  Clone the template repository to use and make sure you can run through the sample.
+The first assignment you have is to make sure that your environment is working by creating a calculator example.
 
 ## 📁 Project Structure
-Here's a simple structure for your project:
+Here's a simple structure for your project.  Create this in your container.
 
 ```
 your-project/
@@ -153,15 +153,7 @@ Make sure these extensions are installed from the VS Code Marketplace:
 
 ---
 
-#### 2. Open the Project Folder
-
-Open the root folder of your project (e.g., `CalculatorApp/`) in VS Code.
-
-> ⚠️ Don’t open just the `src/` or `test/` make sure VSCode is at the **entire project folder**.
-
----
-
-#### 3. Fix Classpath & Errors
+#### 2. Fix Classpath & Errors
 
 If you see red errors (especially in the test file), it’s usually because:
 - JUnit isn’t available yet  
@@ -171,7 +163,7 @@ To fix this:
 
 1. Open the **Command Palette** (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac)  
 2. Search for: `Java: Configure Classpath`  
-3. Add the `/src` and `/test` folders
+3. Add the `/src` and `/test`  and `/lib` folders.
 
 
 ---
@@ -186,6 +178,7 @@ To fix this:
 This will:
 - Download the JUnit 5 `.jar` files into a `lib/` folder  
 - Set them up automatically for the project
+- Sometime the JUnit jar will not download into the correct directory.  Move it to the lib directory in your project.
 
 ---
 
