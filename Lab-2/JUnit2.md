@@ -154,7 +154,164 @@ This pack includes:
 Once installed, **reload** VSCode if prompted.
 
 ---
-### 🧱 Step 2: Create a Maven Project (No Terminal)
+
+### 🧱 Step 2: Create a Maven Project from the terminal
+
+From the directory where you want the project created:
+
+```bash
+mvn archetype:generate   -DgroupId=com.example   -DartifactId=my-app   -DarchetypeArtifactId=maven-archetype-quickstart   -DinteractiveMode=false
+```
+
+This creates:
+
+```
+my-app/
+├── pom.xml
+└── src
+    ├── main/java/com/example/App.java
+    └── test/java/com/example/AppTest.java
+```
+
+---
+## 3. Important: The generated project does NOT use JUnit 5
+
+The default **Maven quickstart archetype** still uses **JUnit 3**, which is very old.
+
+### Evidence in `pom.xml` (original)
+
+```xml
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>3.8.1</version>
+  <scope>test</scope>
+</dependency>
+```
+
+### Evidence in `AppTest.java` (original)
+
+```java
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+public class AppTest extends TestCase {
+    public void testApp() {
+        assertTrue(true);
+    }
+}
+```
+
+This **will not work** once we switch to JUnit 5.
+
+---
+
+## 4. Update `pom.xml` for Java 17 + JUnit 5
+
+Replace the contents of `pom.xml` with the following:
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.jupiter.version>5.10.1</junit.jupiter.version>
+  </properties>
+
+  <dependencies>
+    <!-- JUnit 5 -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
+```
+
+---
+
+## 5. Rewrite the test code for JUnit 5
+
+The existing test **must be rewritten** because JUnit 3 classes no longer exist.
+
+Replace:
+
+```
+src/test/java/com/example/AppTest.java
+```
+
+With:
+
+```java
+package com.example;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class AppTest {
+
+    @Test
+    void testApp() {
+        assertTrue(true);
+    }
+}
+```
+---
+
+## 6. Run Maven from the command line
+
+From the **project root** (`my-app`):
+
+```bash
+mvn test
+```
+
+Expected output:
+```
+BUILD SUCCESS
+```
+
+This confirms:
+- Maven is running in the correct directory
+- Java 17 is configured correctly
+- JUnit 5 tests are compiling and executing
+
+---
+
+##  Optional - Create a Maven Project (No Terminal)
+### 🧱 Step 1
 
 1. Install Apache Maven and put the bin directory in your path.
 2. Open **VSCode**:  
@@ -178,7 +335,7 @@ Once installed, **reload** VSCode if prompted.
 
 ---
 
-### 📦 Step 3: Ensure the proper JDK version.
+### 📦 Step 2: Ensure the proper JDK version.
 
 1. Find out what version of java you have by java -version.
 2. In the **Explorer** (left sidebar), open `pom.xml`.
@@ -200,7 +357,7 @@ This ensures Maven downloads all dependencies.
 
 ---
 
-### 📦 Step 4: Add JUnit to the Project
+### 📦 Step 3: Add JUnit to the Project
 
 1. In the **Explorer** (left sidebar), open `pom.xml`.
 2. Add this inside the `<dependencies>` tag:
@@ -225,7 +382,7 @@ This ensures Maven downloads all dependencies.  If you use the command line use 
 
 ---
 
-## 🧪 Step 5: Run the default test.
+## 🧪 Step 4: Run the default test.
 
 1. In the folder: `src/test/java/com/example/`, open `AppTest.java`.
 2. Notice you will get an error due to that this test is trying to use JUnit 4.
@@ -238,7 +395,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 ```
 
-## ▶️ Step 6: Run the Tests from VSCode (No CLI)
+## ▶️ Step 5: Run the Tests from VSCode (No CLI)
 
 ### Option 1: Use the Testing Sidebar
 
