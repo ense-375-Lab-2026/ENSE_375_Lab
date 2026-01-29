@@ -174,7 +174,7 @@ my-app/
 ```
 
 ---
-### Step 3. Important: The generated project does NOT use JUnit 5
+### 🧱 Step 3: Important: The generated project does NOT use JUnit 5
 
 The default **Maven quickstart archetype** still uses **JUnit 3**, which is very old.
 
@@ -207,7 +207,7 @@ This **will not work** once we switch to JUnit 5.
 
 ---
 
-### Step 4. Update `pom.xml` for Java 17 + JUnit 5
+### 🧱 Step 4: Update `pom.xml` for Java 17 + JUnit 5
 
 Replace the contents of `pom.xml` with the following:
 
@@ -262,7 +262,7 @@ Replace the contents of `pom.xml` with the following:
 
 ---
 
-### Step 5. Rewrite the test code for JUnit 5
+### 🧱 Step 5: Rewrite the test code for JUnit 5
 
 The existing test **must be rewritten** because JUnit 3 classes no longer exist.
 
@@ -290,7 +290,7 @@ class AppTest {
 ```
 ---
 
-### Step 6. Run Maven from the command line
+### 🧱 Step 6: Run Maven from the command line
 
 From the **project root** (`my-app`):
 
