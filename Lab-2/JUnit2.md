@@ -518,7 +518,7 @@ You are to create **JUnit tests** in order to test the functionality of the desi
 
 
 ## 📦 Prerequisites
-For the lab machines and perhaps your own you need to perform the following:
+For the lab machines and perhaps your own you may need to perform the following:
 - [Maven](https://maven.apache.org)  Download the Binary archive.
 - Students do not have access to modifying the system PATH or creating system environment variables.  You can modify your variables however.
 - **JAVA_HOME** Create a JAVA_HOME variable and point it to: C:\jdk-17.0.1
